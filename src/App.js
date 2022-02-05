@@ -1,13 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import FinalCheckout from './components/FinalCheckout';
 import MyForm from './components/MyForm';
+import Heading from './components/Heading';
 
 function App() {
   return (
     <div>
+      <Heading />
       <MyForm />
-      <FinalCheckout />
     </div>
   );
 }
