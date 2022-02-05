@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import '../css/MyForm.css';
+import FinalCheckout from './FinalCheckout';
 
 export default class MyForm extends Component {
   constructor(props) {
@@ -16,20 +18,32 @@ export default class MyForm extends Component {
   render() {
     return (
       <div>
-        <form>
+        <form className="MyForm">
           <label for="hoursNeeded">
             Enter the number of hours needed for your booking
           </label>
+          <br />
           <input
             name="hoursNeeded"
+            id="hoursNeeded"
             type="number"
             value={this.state.hours}
-          ></input>
+            required
+          />
+          <br />
           <label for="dateBooking">Choose the date for your booking</label>
-          <input name="dateBooking" type="date" />
+          <br />
+          <input name="dateBooking" id="dateBooking" type="date" required />
+          <br />
           <label for="timeBooking">Choose the time for your booking</label>
-          <input name="timeBooking" type="time" />
+          <br />
+          <input name="timeBooking" id="timeBooking" type="time" required />
         </form>
+        <FinalCheckout
+          hours={this.state.hours}
+          date={this.state.date.toDateString()}
+          time={this.state.time.toTimeString()}
+        />
       </div>
     );
   }
