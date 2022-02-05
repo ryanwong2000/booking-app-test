@@ -13,11 +13,8 @@ export default class MyForm extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  priceWeekdays = 100;
-  priceWeekends = 150;
-
   handleChange = (event, fieldName) => {
-    console.log(fieldName, event.target.value);
+    console.log(fieldName, event.target.value, typeof event.target.value);
     this.setState({
       [fieldName]: event.target.value
     });
@@ -36,6 +33,8 @@ export default class MyForm extends Component {
             id="hoursNeeded"
             type="number"
             value={this.state.hours}
+            min="0"
+            max="10"
             onChange={(event) => this.handleChange(event, 'hours')}
             required
           />
