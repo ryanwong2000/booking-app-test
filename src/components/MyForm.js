@@ -7,19 +7,27 @@ export default class MyForm extends Component {
     super(props);
     this.state = {
       hours: 0,
-      date: new Date(),
-      time: new Date()
+      date: '',
+      time: ''
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   priceWeekdays = 100;
   priceWeekends = 150;
 
+  handleChange = (event, fieldName) => {
+    console.log(fieldName, event.target.value);
+    this.setState({
+      [fieldName]: event.target.value
+    });
+  };
+
   render() {
     return (
       <div>
         <form className="MyForm">
-          <label for="hoursNeeded">
+          <label htmlFor="hoursNeeded">
             Enter the number of hours needed for your booking
           </label>
           <br />
@@ -28,21 +36,34 @@ export default class MyForm extends Component {
             id="hoursNeeded"
             type="number"
             value={this.state.hours}
+            onChange={(event) => this.handleChange(event, 'hours')}
             required
           />
           <br />
-          <label for="dateBooking">Choose the date for your booking</label>
+          <label htmlFor="dateBooking">Choose the date for your booking</label>
           <br />
-          <input name="dateBooking" id="dateBooking" type="date" required />
+          <input
+            name="dateBooking"
+            id="dateBooking"
+            type="date"
+            onChange={(event) => this.handleChange(event, 'date')}
+            required
+          />
           <br />
-          <label for="timeBooking">Choose the time for your booking</label>
+          <label htmlFor="timeBooking">Choose the time for your booking</label>
           <br />
-          <input name="timeBooking" id="timeBooking" type="time" required />
+          <input
+            name="timeBooking"
+            id="timeBooking"
+            type="time"
+            onChange={(event) => this.handleChange(event, 'time')}
+            required
+          />
         </form>
         <FinalCheckout
           hours={this.state.hours}
-          date={this.state.date.toDateString()}
-          time={this.state.time.toTimeString()}
+          date={this.state.date}
+          time={this.state.time}
         />
       </div>
     );
