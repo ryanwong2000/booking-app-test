@@ -2,22 +2,75 @@ import React, { Component } from 'react';
 import '../css/MyForm.css';
 import FinalCheckout from './FinalCheckout';
 
-export default class MyForm extends Component {
+export default class SillyForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       hours: 0,
-      date: '',
-      time: ''
+      hoursDisp: 0,
+      date: this.randomDate(),
+      time: this.randomTime(),
+      stopped: false
     };
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange = (event, fieldName) => {
-    console.log(fieldName, event.target.value, typeof event.target.value);
-    this.setState({
-      [fieldName]: event.target.value
+  randomDate = () => {
+    const start = new Date();
+    const end = new Date(2030, 0, 1);
+    const random = new Date(
+      start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    );
+    console.log(random.toISOString().split('T')[0]);
+    return random.toISOString().split('T')[0];
+  };
+
+  randomTime = () => {
+    const hour = Math.floor(Math.random() * 24).toLocaleString('en-US', {
+      minimumIntegerDigits: 2,
+      useGrouping: false
+    }); //ensures 2 digits for hour (ex: 02:13)
+    const min = Math.floor(Math.random() * 60).toLocaleString('en-US', {
+      minimumIntegerDigits: 2,
+      useGrouping: false
     });
+    return `${hour}:${min}`;
+  };
+
+  handleChange = (event, fieldName) => {
+    switch (fieldName) {
+      //handle set hours
+      case 'hours':
+        if (!this.state.stopped) {
+          clearInterval(this.timeout);
+          this.setState({ stopped: true, hours: this.state.hoursDisp });
+        } else {
+          this.setState({ stopped: false });
+          this.startCycle();
+        }
+        break;
+
+      //handle random datetime
+      case 'dateTime':
+        this.setState({
+          date: this.randomDate(),
+          time: this.randomTime()
+        });
+        break;
+      default:
+        return;
+    }
+  };
+
+  startCycle = () => {
+    this.timeout = setInterval(() => {
+      let currentIdx = this.state.hoursDisp;
+      this.setState({ hoursDisp: (currentIdx + 1) % 11 });
+    }, 100);
+  };
+
+  //set interval to go through the numbers 0-10
+  componentDidMount = () => {
+    this.startCycle();
   };
 
   render() {
@@ -29,43 +82,30 @@ export default class MyForm extends Component {
               Choose the number of hours needed for your booking
             </label>
             <br />
-            <input
-              name="hoursNeeded"
-              id="hoursNeeded"
-              type="number"
-              value={this.state.hours}
-              min="0"
-              max="10"
-              onChange={(event) => this.handleChange(event, 'hours')}
-              required
-            />
-            <small> (Max: 10 hours)</small>
+            <p>
+              {this.state.hoursDisp}{' '}
+              <button
+                type="button"
+                onClick={(event) => this.handleChange(event, 'hours')}
+              >
+                {this.state.stopped ? 'Try Again' : 'Stop'}
+              </button>
+            </p>
           </div>
           <div>
-            <label htmlFor="dateBooking">
-              Choose the date for your booking
+            <label htmlFor="dateTimeBooking">
+              Is this when you want your booking?
             </label>
             <br />
-            <input
-              name="dateBooking"
-              id="dateBooking"
-              type="date"
-              onChange={(event) => this.handleChange(event, 'date')}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="timeBooking">
-              Choose the time for your booking
-            </label>
-            <br />
-            <input
-              name="timeBooking"
-              id="timeBooking"
-              type="time"
-              onChange={(event) => this.handleChange(event, 'time')}
-              required
-            />
+            <p>
+              {this.state.date} @ {this.state.time}
+              <button
+                type="button"
+                onClick={(event) => this.handleChange(event, 'dateTime')}
+              >
+                No
+              </button>
+            </p>
           </div>
         </form>
 

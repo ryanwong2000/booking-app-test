@@ -7,7 +7,7 @@ export default function FinalCheckout(props) {
 
   const getTotal = (date, hours, time, priceWeekdays, priceWeekends) => {
     const dayOfWeek = new Date(date).getDay();
-    console.log('day', dayOfWeek);
+    // console.log('day', dayOfWeek);
     //check for overlap between a weekday and weekends
     if (
       Number(time.substring(0, 2)) + Number(hours) > 24 &&
