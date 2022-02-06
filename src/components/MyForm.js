@@ -24,40 +24,49 @@ export default class MyForm extends Component {
     return (
       <div>
         <form className="MyForm">
-          <label htmlFor="hoursNeeded">
-            Enter the number of hours needed for your booking
-          </label>
-          <br />
-          <input
-            name="hoursNeeded"
-            id="hoursNeeded"
-            type="number"
-            value={this.state.hours}
-            min="0"
-            max="10"
-            onChange={(event) => this.handleChange(event, 'hours')}
-            required
-          />
-          <br />
-          <label htmlFor="dateBooking">Choose the date for your booking</label>
-          <br />
-          <input
-            name="dateBooking"
-            id="dateBooking"
-            type="date"
-            onChange={(event) => this.handleChange(event, 'date')}
-            required
-          />
-          <br />
-          <label htmlFor="timeBooking">Choose the time for your booking</label>
-          <br />
-          <input
-            name="timeBooking"
-            id="timeBooking"
-            type="time"
-            onChange={(event) => this.handleChange(event, 'time')}
-            required
-          />
+          <div>
+            <label htmlFor="hoursNeeded">
+              Enter the number of hours needed for your booking
+            </label>
+            <br />
+            <input
+              name="hoursNeeded"
+              id="hoursNeeded"
+              type="number"
+              value={this.state.hours}
+              min="0"
+              max="10"
+              onChange={(event) => this.handleChange(event, 'hours')}
+              required
+            />
+            <small> (Max: 10 hours)</small>
+          </div>
+          <div>
+            <label htmlFor="dateBooking">
+              Choose the date for your booking
+            </label>
+            <br />
+            <input
+              name="dateBooking"
+              id="dateBooking"
+              type="date"
+              onChange={(event) => this.handleChange(event, 'date')}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="timeBooking">
+              Choose the time for your booking
+            </label>
+            <br />
+            <input
+              name="timeBooking"
+              id="timeBooking"
+              type="time"
+              onChange={(event) => this.handleChange(event, 'time')}
+              required
+            />
+          </div>
         </form>
         <FinalCheckout
           hours={this.state.hours}

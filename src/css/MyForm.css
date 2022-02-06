@@ -1,4 +1,9 @@
 .MyForm {
   margin: auto;
   border: 1px solid #ccc;
+  max-width: 400px;
+  padding: 12px;
+}
+.total {
+  text-align: center;
 }

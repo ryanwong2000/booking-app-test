@@ -1,4 +1,5 @@
 import React from 'react';
+import '../css/MyForm.css';
 
 export default function FinalCheckout(props) {
   const PRICE_WEEKDAYS = 100;
@@ -41,7 +42,7 @@ export default function FinalCheckout(props) {
   );
   return (
     <div>
-      <h3>Total: ${total}</h3>
+      <h3 className="total">Total: ${total}</h3>
     </div>
   );
 }
