@@ -82,8 +82,10 @@ export default class SillyForm extends Component {
               Choose the number of hours needed for your booking
             </label>
             <br />
-            <p>
-              {this.state.hoursDisp}{' '}
+
+            <p style={{ margin: 3 }}>
+              <span style={{ padding: '10' }}>{this.state.hoursDisp}</span>
+              &nbsp;
               <button
                 type="button"
                 onClick={(event) => this.handleChange(event, 'hours')}
@@ -102,6 +104,7 @@ export default class SillyForm extends Component {
               <button
                 type="button"
                 onClick={(event) => this.handleChange(event, 'dateTime')}
+                style={{ margin: '0px 8px' }}
               >
                 No
               </button>
