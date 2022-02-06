@@ -26,7 +26,7 @@ export default class MyForm extends Component {
         <form className="MyForm">
           <div>
             <label htmlFor="hoursNeeded">
-              Enter the number of hours needed for your booking
+              Choose the number of hours needed for your booking
             </label>
             <br />
             <input
