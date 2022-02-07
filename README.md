@@ -4,6 +4,10 @@ Booking app that asks for the time, date, and duration of a booking and displays
 
 Secret 'Silly' version with some *creative* input solutions.
 
+# Demo
+
+![Booking App Demo](public/Demo.gif)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
